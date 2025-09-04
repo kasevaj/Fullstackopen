@@ -1,57 +1,51 @@
-const Header = ({ course }) => {
-  console.log(course.name)
-  return (
-    <div>
-      <h1>
-        {course.name}
-      </h1>
-    </div>
-  )
-}
+import { useState } from 'react'
 
-const Content = ({ course }) => (
-  <div>
-    {course.parts.map((part) => (
-      <Part key={part.name} part={part} />
-    ))}
-  </div>
+const Button = (props) => (
+
+  <button onClick={props.onClick}>
+    {props.text}
+  </button>
+
 )
-
-
-const Total = ({ course }) => (
-  <p>Number of exercises {course.parts.reduce((sum, p) => sum + p.exercises, 0)}</p>
-)
-
-
-const Part = ({ part }) => <p>{part.name} {part.exercises}</p>
-
 
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      }
-    ]
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  const handleGoodClick = () => {
+    setGood(good + 1)
+    console.log("jotain tapahtui good")
+  }
+  const handleNeutralClick = () => {
+    setNeutral(neutral + 1)
+    console.log("jotain tapahtui neutral")
+  }
+  const handleBadClick = () => {
+    setBad(bad + 1)
+    console.log("jotain tapahtui bad")
   }
 
   return (
+
     <div>
-      <Header course={course} />
-      <Content course={course} />
-      <Total course={course} />
+      <header>
+        Give Feedback
+      </header>
+      <Button onClick={handleGoodClick} text="good"></Button>
+      <Button onClick={handleNeutralClick} text="neutral"></Button>
+      <Button onClick={handleBadClick} text="bad"></Button>
+      <p>
+        Statistics
+      </p>
+      <p>good {good}</p>
+      <p>neutral {neutral}</p>
+      <p>bad {bad}</p>
     </div>
   )
 }
 
 export default App
+
+// kolme nappulaa, ja niiden omat summat
