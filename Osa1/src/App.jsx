@@ -1,5 +1,20 @@
 import { useState } from 'react'
 
+const StatisticLine = ({ text, value }) => {
+  return (
+    <div>{text} {value}</div>
+  )
+}
+
+
+const Button = (props) => {
+  return (
+    < button onClick={props.onClick} >
+      {props.text}
+    </button >
+  )
+}
+
 const Statistics = (props) => {
   if (props.total === 0) {
     return (
@@ -11,12 +26,12 @@ const Statistics = (props) => {
   return (
     <div>
       <header>Statistics</header>
-      <p>good {props.good}</p>
-      <p>neutral {props.neutral}</p>
-      <p>bad {props.bad}</p>
-      <p>all {props.total}</p>
-      <p>average {props.average}</p>
-      <p>positive {props.positive}</p>
+      <StatisticLine text="good" value={props.good} />
+      <StatisticLine text="neutral" value={props.neutral} />
+      <StatisticLine text="bad" value={props.bad} />
+      <StatisticLine text="total" value={props.total} />
+      <StatisticLine text="average" value={props.average} />
+      <StatisticLine text="positive" value={props.positive} />
     </div>
   )
 }
@@ -29,6 +44,7 @@ const App = () => {
   const [total, setTotal] = useState(0)
   const [average, setAverage] = useState(0)
   const [positive, setPositive] = useState(0)
+
 
   const handleGoodClick = () => {
     const newGood = good + 1
@@ -71,9 +87,10 @@ const App = () => {
       <header>
         Give Feedback
       </header>
-      <button onClick={handleGoodClick}> good</button>
-      <button onClick={handleNeutralClick}> neutral</button>
-      <button onClick={handleBadClick}> bad</button>
+      <Button onClick={handleGoodClick} text='good'></Button>
+      <Button onClick={handleNeutralClick} text="neutral"></Button>
+      <Button onClick={handleBadClick} text="bad"></Button>
+
       <Statistics
         good={good}
         neutral={neutral}
@@ -88,8 +105,3 @@ const App = () => {
 }
 
 export default App
-
-// lisätään kokonaissumma, keskiarvo ja positiivisten arvosteluiden prosenttimäärä
-
-// keskiarvo kun good = 1, neutral = 0 ja bad = -1
-// average = (good - bad) / total ??
