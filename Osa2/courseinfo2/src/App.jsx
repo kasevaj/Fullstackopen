@@ -16,6 +16,7 @@ const Part = (props) => (
 )
 
 const Total = (props) => {
+  //2.3 samassa
   const total = props.course.parts.reduce((sum, part) => sum + part.exercises, 0)
   console.log("total", total)
   return (
